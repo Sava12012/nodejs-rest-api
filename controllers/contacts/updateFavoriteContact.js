@@ -1,5 +1,5 @@
 const { updateFavoriteDiagram } = require("../../Diagram/contactDiagram");
-const Contact = require("../../models/contact");
+const Contact = require("../../models/contacts");
 const { linkError } = require("../../helpers/linkError");
 
 const updateFavoruteContact = async (req, res, next) => {
