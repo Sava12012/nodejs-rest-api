@@ -1,10 +1,10 @@
-const contacts = require("../../models/contacts");
+const Contacts = require("../../models/contacts");
 const { linkError } = require("../../helpers/linkError");
 
 const getContactById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const contact = await contacts.getContactById(id);
+    const contact = await Contact.findById(id);
     if (!contact) {
       throw linkError(404, "Contact is not found");
     }
