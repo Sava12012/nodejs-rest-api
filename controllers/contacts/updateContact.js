@@ -1,4 +1,4 @@
-const Contacts = require("../../models/contacts");
+const Contact = require("../../models/contacts");
 const { contactDiagram } = require("../../Diagram/contactDiagram");
 const { linkError } = require("../../helpers/linkError");
 
