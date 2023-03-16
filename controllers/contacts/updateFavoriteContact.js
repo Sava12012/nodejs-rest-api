@@ -1,12 +1,12 @@
+const { updateFavoriteDiagram } = require("../../Diagram/contactDiagram");
 const Contact = require("../../models/contacts");
-const { contactDiagram } = require("../../Diagram/contactDiagram");
 const { linkError } = require("../../helpers/linkError");
 
-const updateContact = async (req, res, next) => {
+const updateFavoruteContact = async (req, res, next) => {
   try {
-    const { error } = contactDiagram.validate(req.body);
+    const { error } = updateFavoriteDiagram.validate(req.body);
     if (error) {
-      throw linkError(400, "Missing fields");
+      throw HttpError(400, "Missing field favorite");
     }
     const { id } = req.params;
     const data = await Contact.findByIdAndUpdate(id, req.body, { new: true });
@@ -19,4 +19,4 @@ const updateContact = async (req, res, next) => {
   }
 };
 
-module.exports = updateContact;
+module.exports = updateFavoruteContact;
