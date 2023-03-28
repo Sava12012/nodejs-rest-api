@@ -1,13 +1,21 @@
-const express = require("express");
-const isValid = require("../../middlewares/isValidid");
-const controlRout = require("../../controllers/index");
-const router = express.Router();
+const express = require('express')
+const authenticate = require('../../middlewares/authenticate')
+const { isValid } = require('../../middlewares/index')
+const ctrl = require('../../controllers/contacts/index')
 
-router.get("/", controlRout.getContacts);
-router.get("/:id", isValid, controlRout.getContactById);
-router.post("/", controlRout.postContact);
-router.delete("/:id", isValid, controlRout.deleteContact);
-router.put("/:id", isValid, controlRout.updateContact);
-router.patch("/:id/favorite", isValid, controlRout.updateFavoruteContact);
+const router = express.Router()
 
-module.exports = router;
+
+router.get('/', authenticate, ctrl.getContacts)
+
+router.get('/:id', authenticate, isValid, ctrl.getContactById)
+
+router.post('/', authenticate, ctrl.postContact)
+
+router.delete('/:id', authenticate, isValid, ctrl.deleteContact )
+
+router.put('/:id', authenticate, isValid, ctrl.updateContact)
+
+router.patch('/:id/favorite', authenticate, isValid, ctrl.updateFavoruteContact)
+
+module.exports = router
