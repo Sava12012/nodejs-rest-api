@@ -1,7 +1,7 @@
-const HttpError = require("./HttpError");
-const sendEmail = require("./sendEmail");
+const HttpError = require('./HttpError')
+const sendEmail = require('./sendEmail')
 
 module.exports = {
-  HttpError,
-  sendEmail,
-};
+    HttpError,
+    sendEmail,
+}
