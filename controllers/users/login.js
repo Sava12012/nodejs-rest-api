@@ -6,7 +6,7 @@ const User = require('../../models/user')
 const {HttpError} = require('../../helpers/index')
 
 const {SECRET_KEY} = process.env
-
+ 
 const loginUser = async (req, res, next) => {
     try {
         const {error} = loginSchema.validate(req.body)
@@ -16,15 +16,16 @@ const loginUser = async (req, res, next) => {
         const {email, password} = req.body
 
         const user = await User.findOne({email})
-          
-        if(!user) {
-            throw HttpError(401, "Email or password is invalid")
-        }
         const comparePassword = await bcrypt.compare(password, user.password)
         
-        if(!comparePassword) {
-            throw HttpError(401, "Email or password is wrong")
+        if(!user || !comparePassword) {
+            throw HttpError(401, "Email or password is invalid")
         }
+
+        if(!user.verify) {
+            throw HttpError(400, "Email not verify")
+        }
+        
         const payload = {
             id: user._id,
         }
